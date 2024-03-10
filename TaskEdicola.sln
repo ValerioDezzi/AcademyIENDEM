@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskEdicola", "TaskEdicola\TaskEdicola.csproj", "{FD2195C8-E9F7-4FB1-AF98-45B0677B7880}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD2195C8-E9F7-4FB1-AF98-45B0677B7880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD2195C8-E9F7-4FB1-AF98-45B0677B7880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD2195C8-E9F7-4FB1-AF98-45B0677B7880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD2195C8-E9F7-4FB1-AF98-45B0677B7880}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3777F06E-DCBD-4E11-8D11-ABA34C364D70}
+	EndGlobalSection
+EndGlobal

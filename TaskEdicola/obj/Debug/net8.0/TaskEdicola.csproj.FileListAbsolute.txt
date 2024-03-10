@@ -1,0 +1,14 @@
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\bin\Debug\net8.0\TaskEdicola.exe
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\bin\Debug\net8.0\TaskEdicola.deps.json
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\bin\Debug\net8.0\TaskEdicola.runtimeconfig.json
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\bin\Debug\net8.0\TaskEdicola.dll
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\bin\Debug\net8.0\TaskEdicola.pdb
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\TaskEdicola.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\TaskEdicola.AssemblyInfoInputs.cache
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\TaskEdicola.AssemblyInfo.cs
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\TaskEdicola.csproj.CoreCompileInputs.cache
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\TaskEdicola.dll
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\refint\TaskEdicola.dll
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\TaskEdicola.pdb
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\TaskEdicola.genruntimeconfig.cache
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\ref\TaskEdicola.dll
