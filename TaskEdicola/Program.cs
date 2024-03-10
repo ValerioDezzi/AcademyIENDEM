@@ -30,7 +30,9 @@ namespace TaskEdicola
             edicola.aggiungiPubblicazione(giornaleDaVendere);
             edicola.vendiPubblicazione(giornaleDaVendere);
             edicola.stampaElencoVendite();
-
+            
+            edicola.stampaVenditePerData(DateTime.Now);
+            
         }
     }
 }

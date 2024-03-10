@@ -12,3 +12,4 @@ C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\
 C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\TaskEdicola.pdb
 C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\TaskEdicola.genruntimeconfig.cache
 C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\ref\TaskEdicola.dll
+C:\Users\valer\Desktop\VisualStudio_Workspace\TaskEdicola\TaskEdicola\obj\Debug\net8.0\TaskEdicola.sourcelink.json

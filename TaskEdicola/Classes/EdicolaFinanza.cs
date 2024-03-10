@@ -15,8 +15,8 @@ namespace TaskEdicola.Classes
         public void vendiPubblicazione(Pubblicazione p)
         {
             if(p is not null && Inventario.Contains(p))
-            {
-                Vendita vendita = new Vendita(p.DataPubblicazione, p, p.Prezzo);
+            {   
+                Vendita vendita = new Vendita(DateTime.Now, p, p.Prezzo);
                 elencoVendite.Add(vendita);
                 rimuoviPubblicazione(p);
                 Console.WriteLine($"{p.Titolo} e' stato venduto per {p.Prezzo}");
@@ -36,13 +36,17 @@ namespace TaskEdicola.Classes
         }
         public void stampaVenditePerData(DateTime dataInput)
         {
-            foreach(Vendita vendita in elencoVendite)
+            Console.WriteLine($"Vendite del {dataInput.ToString("dd/MM/yyyy")}");
+            foreach (Vendita vendita in elencoVendite)
             {
-                if(vendita.DataVendita==dataInput)
+                if(vendita.DataVendita.Date ==dataInput.Date)
                 {
                     vendita.stampaDettagli();
                 }
-                
+                else
+                {
+                    Console.WriteLine("Nessuna vendita");
+                }
             }
         }
         

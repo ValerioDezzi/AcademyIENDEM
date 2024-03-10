@@ -58,6 +58,10 @@ namespace TaskEdicola.Classes
                 {
                     p.stampaDettagli();
                 }
+                else
+                {
+                    Console.WriteLine("Pubblicazione non trovata");
+                }
             }
         }
         public void aggiornaStock(Pubblicazione pubblicazione,int inputAggiornamento)
