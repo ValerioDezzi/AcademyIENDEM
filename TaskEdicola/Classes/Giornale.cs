@@ -16,7 +16,7 @@ namespace TaskEdicola.Classes
         {
             
         }
-        public Giornale(string? titolo, DateTime dataPubblicazione, string categoria, float prezzo, string codice)
+        public Giornale(string? titolo, DateTime dataPubblicazione, string categoria, double prezzo, string codice)
         {
             Titolo = titolo;
             DataPubblicazione = dataPubblicazione;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace TaskEdicola.Classes
@@ -9,62 +10,93 @@ namespace TaskEdicola.Classes
     internal partial class Edicola
     {
         public string? NomeEdicola { get; set; }
-        public List<Pubblicazione>Inventario { get; set; }=new List<Pubblicazione>();
-        
+        public List<Pubblicazione> Inventario { get; set; } = new List<Pubblicazione>();
 
-        public void aggiungiPubblicazione(Pubblicazione inputPubblicazione)
+
+        public void aggiungiPubblicazione(Pubblicazione inputPubblicazione, int inputQuantità)
         {
-            if(Inventario.Contains(inputPubblicazione))
+            if (Inventario.Contains(inputPubblicazione))
             {
-                
-                inputPubblicazione.Contatore++;
+
+                inputPubblicazione.Contatore += inputQuantità;
             }
             else
             {
                 Inventario.Add(inputPubblicazione);
-                inputPubblicazione.Contatore++;
+                inputPubblicazione.Contatore += inputQuantità;
             }
 
-                
+
 
         }
         public void stampaInventario()
         {
-            foreach(Pubblicazione pubblicazione in Inventario)
+            foreach (Pubblicazione pubblicazione in Inventario)
             {
                 pubblicazione.stampaDettagli();
 
             }
         }
-        public void rimuoviPubblicazione(Pubblicazione inputPubblicazione)
+        public void rimuoviPubblicazione(string codice, int quantita)
         {
-            if (Inventario.Contains(inputPubblicazione))
+            foreach (Pubblicazione p in Inventario)
             {
-                Inventario.Remove(inputPubblicazione);
-                inputPubblicazione.Contatore--;
-                
-            }
-            else
-            {
-                Console.WriteLine("Elemento non presente nell inventario");
-            }
-
-        }
-        public void ricercaInventario(string? codiceInput)
-        {
-            foreach(Pubblicazione p in Inventario)
-            {
-                if(p.Codice is not null &&  p.Codice.Equals(codiceInput))
+                if (p.Codice is not null && p.Codice.Equals(codice))
                 {
-                    p.stampaDettagli();
+                    p.Contatore -= quantita;
+                    if(p.Contatore<=0)
+                    {
+                        Console.WriteLine("Elemento in negativo");
+                      
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Pubblicazione non trovata");
+                    Console.WriteLine("Elemento non presente nell inventario");
                 }
             }
+
         }
-        public void aggiornaStock(Pubblicazione pubblicazione,int inputAggiornamento)
+        public void stampaRicercaInventario(string? codiceInput)
+        {
+            foreach (Pubblicazione p in Inventario)
+            {
+                if (p.Codice is not null && p.Codice.Equals(codiceInput))
+                {
+                    p.stampaDettagli();
+                }
+ 
+                    Console.WriteLine("Pubblicazione non trovata");
+                
+            }
+        }
+        public bool IsInInventario(string codice)
+        {
+            if (codice is not null)
+            {
+                foreach (Pubblicazione p in Inventario)
+                {
+                    if (p.Codice.Equals(codice))
+                        return true;
+                }
+            }
+            return false;
+        }
+        public Pubblicazione GetPubblicazione(string codice)
+        {
+            foreach (Pubblicazione p in Inventario)
+            {
+                if (p.Codice == codice)
+                {
+                    return p;
+                }
+            }
+            throw new ArgumentException($"Pubblicazione con codice {codice} non trovata nell'inventario.");
+        }
+
+
+
+    public void aggiornaStock(Pubblicazione pubblicazione,int inputAggiornamento)
         {
             if(Inventario.Contains(pubblicazione))
             {

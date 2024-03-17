@@ -1,4 +1,5 @@
-﻿using TaskEdicola.Classes;
+﻿using System.Linq.Expressions;
+using TaskEdicola.Classes;
 
 namespace TaskEdicola
 {
@@ -7,32 +8,127 @@ namespace TaskEdicola
         static void Main(string[] args)
         {
             Edicola edicola = new Edicola();
-            Pubblicazione giornaleUno = new Giornale("Corriere della sera", new DateTime(2024, 03, 03), "notizie", 1.40f, "01") { };
-            Pubblicazione rivistaUno = new Rivista("Vogue", new DateTime(2024, 02, 02), "Moda", 6.0f, "02") { };
-            Pubblicazione giornaleDue = new Giornale("Il Giornale", new DateTime(2023, 12, 05), "notizie", 1.70f, "03") { };
-            edicola.aggiungiPubblicazione(giornaleUno);
-            edicola.aggiungiPubblicazione(giornaleUno);
-            edicola.aggiungiPubblicazione(giornaleUno);
-            edicola.aggiungiPubblicazione(rivistaUno);
-            Console.WriteLine( "-------------Stampa Inventario");
-            edicola.stampaInventario();
-            edicola.rimuoviPubblicazione(giornaleDue);
-            Console.WriteLine( "---------------Rimozione");
-            edicola.stampaInventario();
-            Console.WriteLine("---------------Ricerca");
-            edicola.ricercaInventario("02");
-            edicola.aggiornaStock(giornaleUno, 28);
-            edicola.stampaInventario();
-            edicola.stampaDisponibilitaFiltrata();
-            Console.WriteLine("---------------------------");
-            Console.WriteLine("Prova vendita");
-            Pubblicazione giornaleDaVendere = new Giornale("Il Giornale", new DateTime(2023, 12, 05), "notizie", 1.70f, "03") { };
-            edicola.aggiungiPubblicazione(giornaleDaVendere);
-            edicola.vendiPubblicazione(giornaleDaVendere);
-            edicola.stampaElencoVendite();
-            
-            edicola.stampaVenditePerData(DateTime.Now);
-            
+
+            bool interazioneAbilitata=true;
+            Console.WriteLine("Benvenuto,segui le istruzione per navigare");
+            while ( interazioneAbilitata )
+            {
+                Console.WriteLine("Cosa vuoi fare?");
+                //aggiungiPubblicazione stampaInventariorimuoviPubblicazionericercaInventario
+                Console.WriteLine("1:Aggiungi Pubblicazione 2: Stampa Inventario 3:Rimuovi Pubblicazione 4:Ricerca Inventario" +
+                    "\n 5: Stampa Inventario Filtrato 0:Esci: ");
+                try {
+                    string? input = Console.ReadLine();
+
+                    switch (input)
+                    {
+
+
+                        case "0":
+                        {
+                                Console.WriteLine("Arrivederci!");
+                                interazioneAbilitata = false;
+                                break;
+
+                        }          
+                        case "1":
+                            {
+                                Console.WriteLine("1.Giornale 2.Rivista");
+                                string? scelta = Console.ReadLine();
+                                if (scelta is not null && scelta.Equals("1"))
+                                {
+                                    Pubblicazione giornale = new Giornale();
+                                    DateTime dataInput = DateTime.Now;
+
+                                    Console.WriteLine("Inserisci Titolo");
+                                    giornale.Titolo = Console.ReadLine();
+
+                                    Console.WriteLine("Inserisci Data di pubblicazione (dd/mm/yyyy:");
+                                    dataInput = DateTime.Parse(Console.ReadLine());
+
+                                    giornale.DataPubblicazione = dataInput;
+
+                                    Console.WriteLine("Inserisci Categoria:");
+                                    giornale.Categoria = Console.ReadLine();
+
+                                    Console.WriteLine("Inserisci Prezzo:");
+                                    giornale.Prezzo = double.Parse(Console.ReadLine());
+
+                                    Console.WriteLine("Inserisci Codice:");
+                                    giornale.Codice = Console.ReadLine();
+
+                                    Console.WriteLine("Quante unità inserire nell'inventario?");
+                                    int inputQuantita = int.Parse(Console.ReadLine());
+                                    edicola.aggiungiPubblicazione(giornale, inputQuantita);
+                                    Console.WriteLine("Inserimento completato con successo!");
+                                    edicola.stampaInventario();
+
+                                    break;
+                                }
+                                else if (scelta is not null && scelta.Equals("2"))
+                                {
+                                    Pubblicazione rivista = new Rivista();
+                                    DateTime dataInput = DateTime.Now;
+
+                                    Console.WriteLine("Inserisci Titolo");
+                                    rivista.Titolo = Console.ReadLine();
+
+                                    Console.WriteLine("Inserisci Data di pubblicazione (dd/mm/yyyy:");
+                                    dataInput = DateTime.Parse(Console.ReadLine());
+
+                                    rivista.DataPubblicazione = dataInput;
+
+                                    Console.WriteLine("Inserisci Categoria:");
+                                    rivista.Categoria = Console.ReadLine();
+
+                                    Console.WriteLine("Inserisci Prezzo:");
+                                    rivista.Prezzo = double.Parse(Console.ReadLine());
+
+                                    Console.WriteLine("Inserisci Codice:");
+                                    rivista.Codice = Console.ReadLine();
+
+                                    Console.WriteLine("Quante unità inserire nell'inventario?");
+                                    int inputQuantita = int.Parse(Console.ReadLine());
+                                    edicola.aggiungiPubblicazione(rivista, inputQuantita);
+                                    Console.WriteLine("Inserimento completato con successo!");
+                                    edicola.stampaInventario();
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Inserimento non valido!");
+                                    break;
+                                }
+                            }
+                        case "2":
+                            edicola.stampaInventario();
+                            break;
+                        case "3":
+                            Console.WriteLine("Inserisci il codice della pubblicazione che vuoi eliminare: ");
+                            string? inputCodice=Console.ReadLine();
+                            Console.WriteLine("Quanti ne vuoi eliminare? :");
+                            int inputQuantita1=int.Parse(Console.ReadLine());
+                            edicola.rimuoviPubblicazione(inputCodice, inputQuantita1);
+                            Console.WriteLine("Elemento rimosso con successo!");
+                            break;
+                        case "4":
+                            {
+                                Console.WriteLine("Inserisci il codice della pubblicazione che stai cercando");
+                                string inputCodice1= Console.ReadLine();
+                                edicola.GetPubblicazione(inputCodice1).stampaDettagli();
+                                break;
+                            }
+                        case "5": 
+                            { 
+                                edicola.stampaDisponibilitaFiltrata();
+                                break;
+                            }
+                    }
+                }catch (Exception ex)
+                {
+                    Console.WriteLine($"Errore {ex.Message} ");
+                }
+            }
         }
     }
 }

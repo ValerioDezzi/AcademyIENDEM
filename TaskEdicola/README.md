@@ -25,4 +25,7 @@ Lo scopo di questa app è gestire l inventario e le vendite di un edicola.
    -stampaElencoVendite():stampa i dettagli di tutte le vendite.
    -stampaVenditePerData():stampa le vendite avvenute nel giorno dataInput.
 7. *Vendita*: classe che crea oggetti vendita, ogni volta che l edicola chiama il metodo vendiPubblicazione(),salva l 'oggetto venduto,il suo  valore e la data di vendita
+
+# TO DO:
+interazione con utente,file csw
   

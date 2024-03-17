@@ -10,10 +10,10 @@ namespace TaskEdicola.Classes
     {
         public DateTime DataVendita {  get; set; }
         public Pubblicazione? OggettoVenduto { get; private set; }
-        public float? Prezzo { get; set; }
+        public double? Prezzo { get; set; }
 
         public Vendita() { }
-        public Vendita(DateTime dataVendita, Pubblicazione oggettoVenduto, float? prezzo)
+        public Vendita(DateTime dataVendita, Pubblicazione oggettoVenduto, double? prezzo)
         {
             DataVendita = dataVendita;
             OggettoVenduto = oggettoVenduto;

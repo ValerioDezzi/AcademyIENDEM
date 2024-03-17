@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\valer\\Desktop\\VisualStudio_Workspace\\TaskEdicola\\TaskEdicola\\TaskEdicola.csproj": {}
+    "C:\\Users\\valer\\Desktop\\AcademyIENDEM MYRepository\\AcademyIENDEM\\TaskEdicola\\TaskEdicola.csproj": {}
   },
   "projects": {
-    "C:\\Users\\valer\\Desktop\\VisualStudio_Workspace\\TaskEdicola\\TaskEdicola\\TaskEdicola.csproj": {
+    "C:\\Users\\valer\\Desktop\\AcademyIENDEM MYRepository\\AcademyIENDEM\\TaskEdicola\\TaskEdicola.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\valer\\Desktop\\VisualStudio_Workspace\\TaskEdicola\\TaskEdicola\\TaskEdicola.csproj",
+        "projectUniqueName": "C:\\Users\\valer\\Desktop\\AcademyIENDEM MYRepository\\AcademyIENDEM\\TaskEdicola\\TaskEdicola.csproj",
         "projectName": "TaskEdicola",
-        "projectPath": "C:\\Users\\valer\\Desktop\\VisualStudio_Workspace\\TaskEdicola\\TaskEdicola\\TaskEdicola.csproj",
+        "projectPath": "C:\\Users\\valer\\Desktop\\AcademyIENDEM MYRepository\\AcademyIENDEM\\TaskEdicola\\TaskEdicola.csproj",
         "packagesPath": "C:\\Users\\valer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\valer\\Desktop\\VisualStudio_Workspace\\TaskEdicola\\TaskEdicola\\obj\\",
+        "outputPath": "C:\\Users\\valer\\Desktop\\AcademyIENDEM MYRepository\\AcademyIENDEM\\TaskEdicola\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
