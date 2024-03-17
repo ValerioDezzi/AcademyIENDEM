@@ -195,11 +195,11 @@ BEGIN
 
 		PRINT 'Errore riscontrato: ' + ERROR_MESSAGE()
 	END CATCH
-END
+END;
 	
 EXEC PurchaseTicket @inputShowID=1,
 @inputCostumerID=2,
-@inputSeatNumber="A2"
+@inputSeatNumber="A2";
 
 
 
@@ -209,4 +209,77 @@ SELECT* FROM Ticket
 					FROM Ticket
 					JOIN Showtime ON Ticket.ShowtimeID=Showtime.ShowtimeID
 					JOIN Theater ON Showtime.TheaterID=Theater.TheaterID
-					Where Showtime.ShowtimeID = 1 AND Ticket.SeatNumber='A1'
+					Where Showtime.ShowtimeID = 1 AND Ticket.SeatNumber='A1';
+-----------------------------------------------------
+/*2. Procedura di Aggiornamento Programmazione Film
+Implementare una stored procedure UpdateMovieSchedule che permetta di aggiornare gli orari
+degli spettacoli per un determinato film. Questo include la possibilità di aggiungere o rimuovere
+spettacoli dall'agenda.*/
+
+SELECT * FROM Showtime
+WHERE ShowtimeID = 4 AND MovieID= 2 AND TheaterID= 2 AND ShowDateTime='2024-17-03 22:30:00.000';
+DROP PROCEDURE IF EXISTS AddMovieSchedule
+CREATE PROCEDURE AddMovieSchedule
+@inputShowTimeID INT,
+@inputMovieId INT,
+@inputTheaterID INT,
+@inputShowDateTime DATETIME,
+@inputPrice DECIMAL(5,2)
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+		INSERT INTO Showtime(ShowtimeID,MovieID,TheaterID,ShowDateTime,Price) VALUES
+		(@inputShowTimeID,@inputMovieId,@inputTheaterID,@inputShowDateTime,@inputPrice);
+		COMMIT TRANSACTION
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRANSACTION
+
+			PRINT 'Errore riscontrato: ' + ERROR_MESSAGE()
+		END CATCH
+END;
+EXEC AddMovieSchedule 
+		@inputShowTimeID=4,
+		@inputMovieId=2,
+		@inputTheaterID=2,
+		@inputShowDateTime='2024-17-03 22:30:00',
+		@inputPrice= 11.00
+
+CREATE PROCEDURE removeMovieSchedule
+	@inputShowTimeID INT,
+	@inputMovieID INT,
+	@inputTheater INT,
+	@inputShowDateTime DATETIME
+AS
+	BEGIN
+		BEGIN TRY
+			BEGIN TRANSACTION
+				DECLARE @contatore INT=0;
+				SELECT @contatore=COUNT(*) FROM Showtime
+					WHERE ShowtimeID = @inputShowTimeID AND MovieID=@inputMovieID AND TheaterID= @inputTheater AND ShowDateTime=@inputShowDateTime; 
+					If @contatore = 1
+						BEGIN
+						DELETE FROM Showtime
+							WHERE ShowtimeID = @inputShowTimeID AND MovieID=@inputMovieID AND TheaterID= @inputTheater AND ShowDateTime=@inputShowDateTime;
+						PRINT 'Showtime eliminato'
+						END
+						ELSE
+						BEGIN
+							SELECT 'ERROR' AS STATUS
+							PRINT 'Non è STATO POSSIBILE ELIMINARE sHOWTIME'
+						END
+			COMMIT TRANSACTION
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRANSACTION
+			PRINT 'Errore riscontrato: ' + ERROR_MESSAGE()
+		END CATCH
+	END
+SELECT * FROM Showtime;
+EXEC removeMovieSchedule @inputShowTimeID=4,
+	@inputMovieID= 2,
+	@inputTheater= 2,
+	@inputShowDateTime='2024-17-03 22:30:00'
+
+
