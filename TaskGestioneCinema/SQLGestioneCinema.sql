@@ -282,4 +282,102 @@ EXEC removeMovieSchedule @inputShowTimeID=4,
 	@inputTheater= 2,
 	@inputShowDateTime='2024-17-03 22:30:00'
 
+CREATE PROCEDURE UpdateUpdateMovieSchedule
+@inputShowTimeID INT,@newShowTimeID INT,
+@inputMovieId INT,@newMovieId INT,
+@inputTheaterID INT,@newTheaterID INT,
+@inputShowDateTime DATETIME,@newShowDateTime DATETIME,
+@inputPrice DECIMAL(5,2),@newPrice DECIMAL(5,2)
+AS
+BEGIN
+	BEGIN TRY
+		EXEC removeMovieSchedule @inputShowTimeID,@inputMovieId,@inputTheaterID,@inputShowDateTime
+		EXEC AddMovieSchedule @newShowTimeID,@newMovieId,@newTheaterID,@newShowDateTime,@newPrice
+		
+	END TRY
+	BEGIN CATCH
+			SELECT 'ERROR' AS STATUS
+			PRINT 'Errore' + ERROR_MESSAGE()
+	END CATCH
+END;
+	EXEC UpdateUpdateMovieSchedule
+				@inputShowTimeID=3,@inputMovieId=2,@inputTheaterID=3,@inputShowDateTime='2024-16-03 15:00:00.000',@inputPrice=9.00,
+				@newShowTimeID=3,@newMovieId=2,@newTheaterID=3,@newShowDateTime='2024-16-03 15:30:00.000',@newPrice=10.00
+----------------------------------------------------------
+/*Sviluppare una stored procedure InsertNewMovie che consenta di inserire un nuovo film nel
+sistema, richiedendo tutti i dettagli pertinenti come titolo, regista, data di uscita, durata e
+classificazione.*/
+CREATE PROCEDURE InsertNewMovie
+@inputMovieID INT,
+@inputTitle VARCHAR(255),
+@inputDirector VARCHAR(100),
+@inputReleaseDate DATE,
+@inputDurationMinutes INT,
+@inputRating VARCHAR(5)
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+		INSERT INTO Movie (MovieID,Title,Director,ReleaseDate,DurationMinutes,Rating)VALUES
+						  (@inputMovieID,@inputTitle,@inputDirector,@inputReleaseDate,@inputDurationMinutes,@inputRating);
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		SELECT 'ERROR' AS STATUS
+		PRINT 'ERRORE'+ ERROR_MESSAGE()
+	END CATCH
+END;
+SELECT * FROM Movie;
+EXEC InsertNewMovie @inputMovieID = 3,
+    @inputTitle = 'Il mio film',
+    @inputDirector = 'Regista',
+    @inputReleaseDate = '2024-03-17',
+    @inputDurationMinutes = 120,
+    @inputRating = 'PG-13';
+--------------------------------------
+/*Creare una stored procedure SubmitReview che consenta ai clienti di lasciare una recensione per
+un film, comprensiva di valutazione, testo e data. Questa procedura dovrebbe verificare che il
+cliente abbia effettivamente acquistato un biglietto per il film in questione prima di permettere la
+pubblicazione della recensione.*/
 
+SELECT * FROM Review
+SELECT COUNT(*) FROM Review WHERE CustomerID=2 AND MovieID=2
+CREATE PROCEDURE SubmitReview
+@inputReviewID INT ,
+@inputMovieID INT,
+@inputCustomerID INT,
+@inputReviewText TEXT,
+@inputRating INT ,
+@inputReviewDate DATETIME 
+AS
+BEGIN
+	BEGIN TRY
+		DECLARE @contatore INT =0;
+		SELECT @contatore=COUNT(*) FROM Review WHERE CustomerID=@inputCustomerID AND MovieID=@inputMovieID
+		BEGIN TRANSACTION
+			IF @contatore>0
+				BEGIN
+					SELECT 'ERROR' AS STATUS
+					PRINT 'iL CLIENTE HA GIA INSERITO UNA RECESIONE PER QUEL FILM' 
+				END
+			ELSE
+				BEGIN
+					INSERT INTO Review (ReviewID, MovieID, CustomerID, ReviewText, Rating, ReviewDate)
+					VALUES
+						(@inputReviewID, @inputMovieID, @inputCustomerID, @inputReviewText, @inputRating, @inputReviewDate)
+				END	
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		SELECT 'ERROR' AS STATUS
+		PRINT 'ERRORE' + ERROR_MESSAGE()
+	END CATCH
+END
+EXEC SubmitReview @inputReviewID=3, @inputMovieID=1, @inputCustomerID=2, @inputReviewText='Caruccio', @inputRating=3, @inputReviewDate='2024/17/03 09:45:00'
+
+
+
+
+	
