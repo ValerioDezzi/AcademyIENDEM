@@ -34,8 +34,10 @@ CREATE TABLE Theater (
 	LastName VARCHAR(50) NOT NULL,
 	Email VARCHAR(100),
 	PhoneNumber VARCHAR(20)
-); CREATE TABLE Ticket (
-	TicketID INT PRIMARY KEY,
+
+	DROP TABLE IF EXISTS Ticket; 
+	CREATE TABLE Ticket (
+	TicketID INT PRIMARY KEY IDENTITY(1,1),
 	ShowtimeID INT,
 	SeatNumber VARCHAR(10) NOT NULL,
 	PurchasedDateTime DATETIME NOT NULL,
@@ -86,10 +88,10 @@ VALUES
 (1, 'Mario', 'Rossi', 'mario.rossi@example.com', '+39 123456789'),
 (2, 'Giulia', 'Bianchi', 'giulia.bianchi@example.com', '+39 987654321');
 
-INSERT INTO Ticket (TicketID, ShowtimeID, SeatNumber, PurchasedDateTime, CustomerID)
+INSERT INTO Ticket (ShowtimeID, SeatNumber, PurchasedDateTime, CustomerID)
 VALUES
-(1, 1, 'A1', '2024-15-03 15:30:00', 1),
-(2, 2, 'B3', '2024-15-03 19:00:00', 2)
+( 1, 'A1', '2024-15-03 15:30:00', 1),
+( 2, 'B3', '2024-15-03 19:00:00', 2)
 
 INSERT INTO Review (ReviewID, MovieID, CustomerID, ReviewText, Rating, ReviewDate)
 VALUES
@@ -114,8 +116,97 @@ SELECT * FROM FilmsInProgrammation;
 -------------------------------------------------------------------------------------------------------
 /*Creare una vista AvailableSeatsForShow che, per ogni spettacolo, mostri il numero totale di
 posti nella sala e quanti sono ancora disponibili. Questa vista è essenziale per il personale alla
-biglietteria per gestire le vendite dei biglietti.*/	CREATE VIEW AvailableSeatsForShow AS	SELECT Theater.Capacity -COUNT(Ticket.TicketID)  AS 'POSTI RIMANENTI',Movie.Title,Theater.Nome, Theater.Capacity	FROM Ticket 	JOIN Showtime ON Ticket.ShowtimeID=Showtime.ShowtimeID	JOIN Movie ON Showtime.MovieID=Movie.MovieID	JOIN Theater ON Showtime.TheaterID=Theater.TheaterID	GROUP BY Showtime.ShowtimeID,Movie.Title,Theater.Capacity,Theater.Nome	SELECT * FROM AvailableSeatsForShow;-----------------------------------------/*Generare una vista TotalEarningsPerMovie che elenchi ogni film insieme agli incassi totali
+biglietteria per gestire le vendite dei biglietti.*/
+
+
+	CREATE VIEW AvailableSeatsForShow AS
+	SELECT Theater.Capacity -COUNT(Ticket.TicketID)  AS 'POSTI RIMANENTI',Movie.Title,Theater.Nome, Theater.Capacity
+	FROM Ticket 
+	JOIN Showtime ON Ticket.ShowtimeID=Showtime.ShowtimeID
+	JOIN Movie ON Showtime.MovieID=Movie.MovieID
+	JOIN Theater ON Showtime.TheaterID=Theater.TheaterID
+	GROUP BY Showtime.ShowtimeID,Movie.Title,Theater.Capacity,Theater.Nome
+	SELECT * FROM AvailableSeatsForShow;
+-----------------------------------------
+/*Generare una vista TotalEarningsPerMovie che elenchi ogni film insieme agli incassi totali
 generati. Questa informazione è cruciale per la direzione per valutare il successo commerciale dei
-film.*/	CREATE VIEW TotalEarningsPerMovie AS	SELECT SUM(PRICE) AS 'Incasso',Movie.Title	FROM Showtime	JOIN Movie ON Showtime.MovieID=Movie.MovieID	GROUP BY Movie.Title	SELECT * FROM TotalEarningsPerMovie;-------------------------------------------------------/*Creare una vista RecentReviews che mostri le ultime recensioni lasciate dai clienti, includendo il
+film.*/
+
+	CREATE VIEW TotalEarningsPerMovie AS
+	SELECT SUM(PRICE) AS 'Incasso',Movie.Title
+	FROM Showtime
+	JOIN Movie ON Showtime.MovieID=Movie.MovieID
+	GROUP BY Movie.Title
+
+
+	SELECT * FROM TotalEarningsPerMovie;
+-------------------------------------------------------
+/*Creare una vista RecentReviews che mostri le ultime recensioni lasciate dai clienti, includendo il
 titolo del film, la valutazione, il testo della recensione e la data. Questo permetterà al personale e
-alla direzione di monitorare il feedback dei clienti in tempo reale.*/SELECT Movie.Title,Review.Rating,Review.ReviewText,Review.ReviewDate	FROM Review	JOIN Movie ON Review.MovieID=Movie.MovieID;	
+alla direzione di monitorare il feedback dei clienti in tempo reale.*/
+
+SELECT Movie.Title,Review.Rating,Review.ReviewText,Review.ReviewDate
+	FROM Review
+	JOIN Movie ON Review.MovieID=Movie.MovieID;
+
+	/*Creare una stored procedure PurchaseTicket che permetta di acquistare un biglietto per uno
+spettacolo, specificando l'ID dello spettacolo, il numero del posto e l'ID del cliente. La procedura
+dovrebbe verificare la disponibilità del posto e registrare l'acquisto.*/
+
+				/*STORE PROCEDURE OER VEDERE POSTI BISPONIBILI MA NON L HO USATA
+				DECLARE @postiDisponibili INT = 0;
+			SELECT @postiDisponibili= Theater.Capacity - COUNT(Ticket.TicketID)
+			FROM Ticket
+			JOIN Showtime ON Ticket.ShowtimeID=Showtime.ShowtimeID
+			JOIN Movie ON Showtime.MovieID=Movie.MovieID
+			JOIN Theater ON Showtime.TheaterID=Theater.TheaterID
+			WHERE Showtime.ShowtimeID=@inputShowID
+			GROUP BY Showtime.ShowtimeID,Movie.Title,Theater.Capacity,Theater.Nome*/
+
+DROP PROCEDURE IF EXISTS PurchaseTicket
+CREATE PROCEDURE PurchaseTicket
+@inputShowID INT,
+@inputCostumerID INT,
+@inputSeatNumber VARCHAR(10)
+AS
+BEGIN
+	DECLARE @IsOccupato INT;
+	 BEGIN TRY		
+			BEGIN TRANSACTION
+				SELECT @IsOccupato=COUNT(*)
+					FROM Ticket
+					JOIN Showtime ON Ticket.ShowtimeID=Showtime.ShowtimeID
+					JOIN Theater ON Showtime.TheaterID=Theater.TheaterID
+					Where Showtime.ShowtimeID = @inputShowID AND Ticket.SeatNumber=@inputSeatNumber
+					
+
+					IF @IsOccupato  >0
+							THROW 50001, 'POSTO NON DISPONIBILE', 1;
+
+
+							INSERT INTO Ticket( CustomerID,SeatNumber,PurchasedDateTime,ShowtimeID) 
+							VALUES( @inputCostumerID,@inputSeatNumber,CURRENT_TIMESTAMP,@inputShowID);
+							
+							PRINT'BIGLIETTO ACQUISTATO'
+							COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+
+		PRINT 'Errore riscontrato: ' + ERROR_MESSAGE()
+	END CATCH
+END
+	
+EXEC PurchaseTicket @inputShowID=1,
+@inputCostumerID=2,
+@inputSeatNumber="A2"
+
+
+
+SELECT* FROM Ticket
+	
+	SELECT COUNT(*)
+					FROM Ticket
+					JOIN Showtime ON Ticket.ShowtimeID=Showtime.ShowtimeID
+					JOIN Theater ON Showtime.TheaterID=Theater.TheaterID
+					Where Showtime.ShowtimeID = 1 AND Ticket.SeatNumber='A1'
