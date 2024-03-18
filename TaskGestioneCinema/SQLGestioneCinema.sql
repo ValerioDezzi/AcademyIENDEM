@@ -133,12 +133,13 @@ generati. Questa informazione è cruciale per la direzione per valutare il succes
 film.*/
 
 	CREATE VIEW TotalEarningsPerMovie AS
-	SELECT SUM(PRICE) AS 'Incasso',Movie.Title
+	SELECT SUM(Price) AS 'Incasso',Movie.Title
 	FROM Showtime
 	JOIN Movie ON Showtime.MovieID=Movie.MovieID
+	JOIN Ticket ON Showtime.ShowtimeID=Ticket.ShowtimeID
 	GROUP BY Movie.Title
 
-
+	 
 	SELECT * FROM TotalEarningsPerMovie;
 -------------------------------------------------------
 /*Creare una vista RecentReviews che mostri le ultime recensioni lasciate dai clienti, includendo il
@@ -291,11 +292,13 @@ CREATE PROCEDURE UpdateUpdateMovieSchedule
 AS
 BEGIN
 	BEGIN TRY
+		BEGIN TRANSACTION
 		EXEC removeMovieSchedule @inputShowTimeID,@inputMovieId,@inputTheaterID,@inputShowDateTime
 		EXEC AddMovieSchedule @newShowTimeID,@newMovieId,@newTheaterID,@newShowDateTime,@newPrice
-		
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
+			ROLLBACK TRANSACTION
 			SELECT 'ERROR' AS STATUS
 			PRINT 'Errore' + ERROR_MESSAGE()
 	END CATCH
