@@ -1,0 +1,15 @@
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\bin\Debug\net8.0\TaskLINQ.exe
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\bin\Debug\net8.0\TaskLINQ.deps.json
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\bin\Debug\net8.0\TaskLINQ.runtimeconfig.json
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\bin\Debug\net8.0\TaskLINQ.dll
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\bin\Debug\net8.0\TaskLINQ.pdb
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\obj\Debug\net8.0\TaskLINQ.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\obj\Debug\net8.0\TaskLINQ.AssemblyInfoInputs.cache
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\obj\Debug\net8.0\TaskLINQ.AssemblyInfo.cs
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\obj\Debug\net8.0\TaskLINQ.csproj.CoreCompileInputs.cache
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\obj\Debug\net8.0\TaskLINQ.sourcelink.json
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\obj\Debug\net8.0\TaskLINQ.dll
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\obj\Debug\net8.0\refint\TaskLINQ.dll
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\obj\Debug\net8.0\TaskLINQ.pdb
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\obj\Debug\net8.0\TaskLINQ.genruntimeconfig.cache
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskLINQ\TaskLINQ\TaskLINQ\obj\Debug\net8.0\ref\TaskLINQ.dll

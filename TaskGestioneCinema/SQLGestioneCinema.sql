@@ -357,7 +357,11 @@ AS
 BEGIN
 	BEGIN TRY
 		DECLARE @contatore INT =0;
-		SELECT @contatore=COUNT(*) FROM Review WHERE CustomerID=@inputCustomerID AND MovieID=@inputMovieID
+		SELECT @contatore=COUNT(*)
+		FROM Review 
+		JOIN Ticket ON Review.CustomerID=Ticket.CustomerID
+		WHERE Customer.CustomerID=@inputCustomerID AND MovieID=@inputMovieID	AND Ticket.CustomerID=Customer.CustomerID
+		
 		BEGIN TRANSACTION
 			IF @contatore>0
 				BEGIN
