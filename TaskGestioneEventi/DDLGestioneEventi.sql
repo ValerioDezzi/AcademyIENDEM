@@ -27,3 +27,5 @@ CREATE TABLE Risorsa(
 	UNIQUE (nome,tipo,fornitore),
 	FOREIGN KEY(eventoRIF) REFERENCES Evento(eventoID) ON DELETE CASCADE
 );
+USE GestioneEventi
+SELECT * FROM Risorsa
