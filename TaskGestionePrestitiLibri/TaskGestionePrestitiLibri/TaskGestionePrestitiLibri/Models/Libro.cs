@@ -13,16 +13,20 @@ namespace TaskGestionePrestitiLibri.Models
         
         public int LibroId { get; set; }
         public string? Titolo { get; set; }
-        public DateTime AnnoPubblicazione { get; set; }
+        public int AnnoPubblicazione { get; set; }
         public bool isDisponibile { get; set; }=false;
+        public string? Isbn { get; set; }
+        public List<Prestito>? ElencoPrestiti { get; set; } = new List<Prestito>();
+
         #region Costruttori
         public Libro() { }
-        public Libro(string? titolo,DateTime annoPubblicazione, bool isDisponibile)
+        public Libro(string? titolo,int annoPubblicazione, bool isDisponibile ,string isbn)
         {
             
             Titolo = titolo;
             AnnoPubblicazione = annoPubblicazione;
             this.isDisponibile = isDisponibile;
+            Isbn = isbn;
         }
 
         #endregion

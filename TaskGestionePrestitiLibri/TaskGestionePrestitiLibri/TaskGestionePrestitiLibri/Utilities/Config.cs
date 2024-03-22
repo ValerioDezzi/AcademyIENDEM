@@ -31,11 +31,9 @@ namespace TaskGestionePrestitiLibri.Utilities
 
 
                 IConfiguration configuration = builder.Build();
-#if DEBUG
+
                 connectionString = configuration.GetConnectionString("ServerLocale");
-#else
-                connectionString = configuration.GetConnectionString("ServerRemota");
-#endif
+
             }
             return connectionString;
         }

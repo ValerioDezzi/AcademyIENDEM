@@ -2356,6 +2356,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.Data.SqlClient >= 5.2.0",
+      "Microsoft.Extensions.Configuration >= 8.0.0",
       "Microsoft.Extensions.Configuration.Json >= 8.0.0"
     ]
   },
@@ -2406,6 +2407,10 @@
           "Microsoft.Data.SqlClient": {
             "target": "Package",
             "version": "[5.2.0, )"
+          },
+          "Microsoft.Extensions.Configuration": {
+            "target": "Package",
+            "version": "[8.0.0, )"
           },
           "Microsoft.Extensions.Configuration.Json": {
             "target": "Package",

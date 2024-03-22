@@ -32,39 +32,7 @@ namespace TaskGestionePrestitiLibri.DAL
 
         public List<Libro> GetAll()
         {
-            List<Libro> elenco= new List<Libro>();
-            using(SqlConnection con =new SqlConnection(Config.getInstance().GetConnectionString())) 
-            {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT libroID,titolo,annoPubblicazione,disponibilita FROM Libro";
-                try
-                {
-                    con.Open();
-                    SqlDataReader reader=cmd.ExecuteReader();
-                    while(reader.Read())
-                    {
-                        elenco.Add(new Libro()
-                        {
-                            LibroId = Convert.ToInt32(reader["libroID"]),
-                            Titolo = reader["titolo"].ToString(),
-                            AnnoPubblicazione = Convert.ToDateTime(reader["annoPubblicazione"]),
-                            isDisponibile = Convert.ToBoolean(reader["disponibilita"])
-
-                        }) ;
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                    Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    con.Close();
-                }
-            }
-
-            return elenco;
+            throw new NotImplementedException();
         }
 
         public Libro GetById(int id)
@@ -82,6 +50,7 @@ namespace TaskGestionePrestitiLibri.DAL
                 sqlCommand.Parameters.AddWithValue("@titoloVal", t.Titolo);
                 sqlCommand.Parameters.AddWithValue("@annoPubbVal", t.AnnoPubblicazione);
                 sqlCommand.Parameters.AddWithValue("@dispVal", t.isDisponibile);
+                
                 try
                 {
                     con.Open();
