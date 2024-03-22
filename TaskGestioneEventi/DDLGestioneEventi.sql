@@ -1,0 +1,29 @@
+CREATE TABLE Evento(
+	eventoID INT PRIMARY KEY IDENTITY (1,1),
+	nomeEvento VARCHAR(100) NOT NULL,
+	descrizione TEXT NOT NULL,
+	dataEvento DATETIME NOT NULL,
+	luogo VARCHAR(100) NOT NULL,
+	capacitaMax INT NOT NULL
+	UNIQUE (nomeEvento,dataEvento)
+);
+CREATE TABLE Partecipante(
+	partecipanteID INT PRIMARY KEY IDENTITY(1,1),
+	nome VARCHAR(100) NOT NULL,
+	cognome VARCHAR(100) NOT NULL,
+	codFis VARCHAR(16) UNIQUE NOT NULL,
+	eventoRIF INT NOT NULL,
+	FOREIGN KEY(eventoRIF) REFERENCES Evento(eventoID) ON DELETE CASCADE
+);
+CREATE TABLE Risorsa(
+	risorsaID INT PRIMARY KEY IDENTITY(1,1),
+	nome VARCHAR(100) NOT NULL,
+	tipo VARCHAR (100) NOT NULL,
+	descrizione TEXT NOT NULL,
+	quantita INT NOT NULL,
+	costoUnitario DECIMAL(10,2) NOT NULL,
+	fornitore VARCHAR (100) NOT NULL,
+	eventoRIF INT NOT NULL,
+	UNIQUE (nome,tipo,fornitore),
+	FOREIGN KEY(eventoRIF) REFERENCES Evento(eventoID) ON DELETE CASCADE
+);
