@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 
 namespace GestioneEventi.Models;
@@ -16,4 +17,9 @@ public partial class Partecipante
     public int EventoRif { get; set; }
 
     public virtual Evento EventoRifNavigation { get; set; } = null!;
+
+    public string EsportaCsv()
+    {
+        return $"{PartecipanteId};{Nome};{Cognome};{CodFis};{EventoRif}";
+    }
 }

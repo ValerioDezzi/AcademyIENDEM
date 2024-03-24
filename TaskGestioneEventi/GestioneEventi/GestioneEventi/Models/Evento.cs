@@ -20,4 +20,9 @@ public partial class Evento
     public virtual ICollection<Partecipante> Partecipantes { get; set; } = new List<Partecipante>();
 
     public virtual ICollection<Risorsa> Risorsas { get; set; } = new List<Risorsa>();
+
+   public string esportaCsv()
+    {
+        return $"{EventoId};{NomeEvento};{Descrizione};{DataEvento};{Luogo};{CapacitaMax}";
+    }
 }

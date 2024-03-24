@@ -1,4 +1,5 @@
-﻿using GestioneEventi.Models;
+﻿using GestioneEventi.Csv;
+using GestioneEventi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestioneEventi
@@ -13,9 +14,11 @@ namespace GestioneEventi
             Console.WriteLine("Menu!");
             while (navigazione)
             {
-                Console.WriteLine("1. Per inserire un evento 2.Per inserire un partecipante" +
-                    " 3.Per Inserire Risorse 4.Visualizza Eventi 5.Visualizza tutti i partecipanti ad un evento" +
-                    " 6.Visualizza tutte le risorse di un evento 7.Elimina Evento 0.Per uscire");
+                Console.WriteLine("1. Per inserire un evento\n 2.Per inserire un partecipante\n" +
+                    " 3.Per Inserire Risorse\n 4.Visualizza Eventi\n 5.Visualizza tutti i partecipanti ad un evento\n" +
+                    " 6.Visualizza tutte le risorse di un evento\n 7.Elimina Evento\n" +
+                    " 8. Per modificare un evento\n 9.Per esportare csv di tutti gli eventi\n" +
+                    " 10.Per esportare csv tutti i partecipanti  0.Per uscire");
                 try
                 {
                     string? inserimento = Console.ReadLine();
@@ -151,18 +154,67 @@ namespace GestioneEventi
                             }
                             break;
                         case "7":
-                            //Console.WriteLine("Inserisci l id dell evento che vuoi eliminare");
-                            // inputRicerca= Convert.ToInt32(Console.ReadLine());
-
                             
+                            Console.WriteLine("Inserisci l id dell evento che vuoi eliminare");
+                            inputRicerca= Convert.ToInt32(Console.ReadLine());
+                            using(var ctx= new GestioneEventiContext())
+                            {
+                                Evento? temp = ctx.Eventos.Where(e => e.EventoId == inputRicerca).FirstOrDefault();
+                                ctx.Entry(temp).State = EntityState.Deleted;
+                                ctx.SaveChanges();
+                                Console.WriteLine("Evento Eliminato");
+                                
+                           
+                            }
+                        break;
+                        case "8":
+                            Console.WriteLine("Inserisci l id dell evento che vuoi modificare:");
+                            inputRicerca = Convert.ToInt32(Console.ReadLine());
+                            
+                            using(var ctx = new GestioneEventiContext())
+                            {
+                                Evento? temp= ctx.Eventos.FirstOrDefault(e=>e.EventoId==inputRicerca);
+                                if (temp is not null)
+                                {
+                                    Console.WriteLine("Inserisci nuovo nome");
+                                    string inputNome=Console.ReadLine();
+                                    temp.NomeEvento = inputNome;
+                                    ctx.SaveChanges();
+                                }
+                            }
+
                             break;
+                        case "9":
+                            Console.WriteLine("Esportazione degli eventi in corso...");
+                            using(var ctx=new GestioneEventiContext())
+                            {
+                                ICollection<Evento> temp = ctx.Eventos.ToList();
+                                if (temp is not null)
+                                {
+                                    foreach(Evento e in temp)
+                                    {
+                                        CsvManager.esportaEvento(e);
+                                    }
 
-
-
-
-
-
-
+                                }
+                              
+                            }
+                           
+                            break;
+                        case "10":
+                            Console.WriteLine("Esportazione in corso");
+                            using(var ctx= new GestioneEventiContext())
+                            {
+                                ICollection<Partecipante>allPartecipanti=ctx.Partecipantes.ToList();
+                                if(allPartecipanti is not null)
+                                {
+                                    foreach (Partecipante par in allPartecipanti)
+                                        CsvManager.esportaPartecipante(par);
+                                }
+                            }
+                            break;
+                        case "11":
+                            break;
 
 
                     }

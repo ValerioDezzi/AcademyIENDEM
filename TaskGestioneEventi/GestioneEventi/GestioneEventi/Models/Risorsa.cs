@@ -22,4 +22,9 @@ public partial class Risorsa
     public int? EventoRif { get; set; }
 
     public virtual Evento? EventoRifNavigation { get; set; }
+
+    public string EsportaCsv()
+    {
+        return $"{RisorsaId};{Nome};{Tipo};{Descrizione};{Quantita};{CostoUnitario};{Fornitore};{EventoRif}";
+    }
 }
