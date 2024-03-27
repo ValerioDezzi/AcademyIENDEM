@@ -1,0 +1,33 @@
+﻿<Window x:Class="GestionaleNegozioAbb.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GestionaleNegozioAbb"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <!-- Menu in alto -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Cambia Gestione">
+                    <MenuItem.Icon>
+                        <Image Source="C:\Users\valer\Desktop\VisualStudio_Workspace\GestionaleNegozioAbb\GestionaleNegozioAbb\Images\layers.png" />
+                    </MenuItem.Icon>
+                    <MenuItem Header="Gestione Prodotti" x:Name="menuGestioneProdotti" Click="menuGestioneProdotti_Click"/> 
+                </MenuItem>
+
+            </MenuItem>
+                
+                
+               
+            
+        </Menu>
+
+        <!-- Immagine a riempire -->
+        <Grid>
+            
+            <Image Source="C:\Users\valer\Desktop\VisualStudio_Workspace\GestionaleNegozioAbb\GestionaleNegozioAbb\Images\HomeLogo.png" Stretch="UniformToFill"/>
+        </Grid>
+    </DockPanel>
+</Window>
