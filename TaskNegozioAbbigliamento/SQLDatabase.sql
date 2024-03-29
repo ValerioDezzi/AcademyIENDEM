@@ -78,4 +78,5 @@ INSERT INTO DettagliOrdini (ordineRIF, variazioneRIF, quantita) VALUES
 
 SELECT * FROM Ordini
 SELECT * FROM VariazioniProdotti
+SELECT * FROM Prodotti
 
