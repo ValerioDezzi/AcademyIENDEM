@@ -61,15 +61,15 @@ namespace GestionaleNegozioAbb.DAL
 
         
 
-        public bool Delete(int prodottoID)
+        public bool Delete(Prodotti prodotto)
         {
             bool risultato = false;
             using (NegozioAbbigliamentoContext ctx = new NegozioAbbigliamentoContext())
             {
                 try
                 {
-                    Prodotti? prodottoDaEliminare = ctx.Prodottis.Where(p => p.ProdottoId == prodottoID).FirstOrDefault();
-                    ctx.Entry(prodottoDaEliminare).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                    
+                    ctx.Entry(prodotto).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
                     ctx.SaveChanges();
                     risultato= true;
                 }
@@ -82,9 +82,33 @@ namespace GestionaleNegozioAbb.DAL
  
         }
 
-        bool IDal<Prodotti>.Update(Prodotti t)
+        public bool Update(Prodotti prodottoDaModificare)
         {
-            throw new NotImplementedException();
+            bool risultato = false;
+            try
+            {
+                using (NegozioAbbigliamentoContext ctx = new NegozioAbbigliamentoContext())
+                {
+
+                    // Verifica se il prodotto esiste nel contesto
+                    Prodotti? prodottoEsistente = ctx.Prodottis.FirstOrDefault(p => p.ProdottoId == prodottoDaModificare.ProdottoId);
+                    if (prodottoEsistente != null)
+                    {
+                        var entry = ctx.Entry(prodottoEsistente);
+                        entry.CurrentValues.SetValues(prodottoDaModificare);
+                        ctx.SaveChanges();
+                        risultato = true;
+                    }
+                }
+            } 
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
+            return risultato;
         }
+
+
     }
 }

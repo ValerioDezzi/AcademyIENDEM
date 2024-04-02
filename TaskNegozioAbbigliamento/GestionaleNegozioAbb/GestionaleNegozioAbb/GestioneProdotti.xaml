@@ -16,7 +16,7 @@
                 <MenuItem Header="Cambia Gestione">
                     <MenuItem.Icon>
                         <Image Source="C:\Users\valer\Desktop\VisualStudio_Workspace\GestionaleNegozioAbb\GestionaleNegozioAbb\Images\layers.png" />
-                    </MenuItem.Icon>
+                    </MenuItem.Icon >
                 </MenuItem>
                 
             </MenuItem>
@@ -35,13 +35,7 @@
                 <TextBox x:Name="tbURL" Margin="20 10"></TextBox>
                 <Button x:Name="btnAggiungi" Margin="20 " Click="btnAggiungi_Click">Aggiungi</Button>
             <!--Fine inserimento -->
-            <!--Inizio Eliminazione -->
-            <Label Margin="20" Foreground="White" FontSize="18px">Elimina Prodotto :</Label>
-            <Label Margin="20 0" Foreground="White">Inserisci id:</Label>
-            <TextBox x:Name="tbInputElim"  Margin="20 10"></TextBox>
-            <Button x:Name="btnElimina" Margin="20 " Click="btnElimina_Click" >Elimina</Button>
-
-            <!--Fine Eliminazione -->
+            
         </StackPanel>
             
             <StackPanel Orientation="Vertical" >
@@ -50,6 +44,7 @@
                         <DataGridTextColumn
                             Header="Nome"
                             Binding="{Binding Nome}"></DataGridTextColumn>
+                        
 
                         <DataGridTextColumn
                             Header="Descrizione"
@@ -58,8 +53,22 @@
                         <DataGridTextColumn
                          Header="Immagine"
                          Binding="{Binding ImmagineURL}"></DataGridTextColumn>
-                        
-                    </DataGrid.Columns>
+
+                    <DataGridTemplateColumn Header="Modifica">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Modifica"  Click="ModificaButton_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Cancella">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Cancella" Click="CancellaButton_Click" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
 

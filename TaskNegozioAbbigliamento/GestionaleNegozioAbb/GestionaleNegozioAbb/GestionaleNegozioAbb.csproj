@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Nuova cartella\**" />
+    <EmbeddedResource Remove="Nuova cartella\**" />
+    <None Remove="Nuova cartella\**" />
+    <Page Remove="Nuova cartella\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
@@ -21,6 +28,7 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Images\" />
+    <Folder Include="Nuova cartella1\" />
   </ItemGroup>
 
 </Project>

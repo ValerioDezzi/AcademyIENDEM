@@ -11,6 +11,6 @@ namespace GestionaleNegozioAbb.DAL
         List<T> GetAll();
         bool Insert(T t);
         bool Update(T t);
-        bool Delete(int t);
+        bool Delete(T t);
     }
 }

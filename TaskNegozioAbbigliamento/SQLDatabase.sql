@@ -1,3 +1,4 @@
+
 CREATE TABLE Utenti(
 	utenteID INT PRIMARY KEY IDENTITY(1,1),
 	nome VARCHAR (50) NOT NULL,
@@ -10,6 +11,7 @@ CREATE TABLE Ordini(
 	utenteRIF INT,
 	FOREIGN KEY (utenteRIF) REFERENCES Utenti(utenteID)
 );
+DROP TABLE IF EXISTS Prodotti
 CREATE TABLE Prodotti(
 	prodottoID INT PRIMARY KEY IDENTITY(1,1),
 	nome VARCHAR(100) NOT NULL,
@@ -20,14 +22,16 @@ CREATE TABLE Categorie(
 	categoriaID INT PRIMARY KEY IDENTITY(1,1),
 	nome VARCHAR(100) UNIQUE NOT NULL,
 );
+DROP TABLE IF EXISTS Prodotti_Categorie
 USE NegozioAbbigliamento
 CREATE TABLE Prodotti_Categorie(
 	prodottoRIF	INT,
 	categoriaRIF INT,
 	PRIMARY KEY(prodottoRIF,categoriaRIF),
-	FOREIGN KEY (prodottoRIF) REFERENCES Prodotti(prodottoID),
-	FOREIGN KEY (categoriaRIF) REFERENCES Categorie(categoriaID),
+	FOREIGN KEY (prodottoRIF) REFERENCES Prodotti(prodottoID) ON DELETE CASCADE,
+	FOREIGN KEY (categoriaRIF) REFERENCES Categorie(categoriaID)ON DELETE CASCADE,
 );
+DROP TABLE IF EXISTS VariazioniProdotti
 CREATE TABLE VariazioniProdotti(
 	variazioneID INT PRIMARY KEY IDENTITY(1,1),
 	colore VARCHAR(50) NOT NULL,
@@ -38,15 +42,16 @@ CREATE TABLE VariazioniProdotti(
     dataInizioOfferta DATETIME,
     dataFineOfferta DATETIME,
 	prodottoRIF INT,
-	FOREIGN KEY (prodottoRIF) REFERENCES Prodotti(prodottoID)
+	FOREIGN KEY (prodottoRIF) REFERENCES Prodotti(prodottoID) ON DELETE CASCADE
 );
+DROP TABLE IF EXISTS DettagliOrdini
 CREATE TABLE DettagliOrdini(
 	dettaglioID INT PRIMARY KEY IDENTITY(1,1),
 	ordineRIF INT,
 	variazioneRIF INT,
 	quantita INT NOT NULL,
-	FOREIGN KEY (ordineRIF) REFERENCES Ordini(ordineID),
-    FOREIGN KEY (variazioneRIF) REFERENCES VariazioniProdotti(variazioneID)
+	FOREIGN KEY (ordineRIF) REFERENCES Ordini(ordineID) ON DELETE CASCADE,
+    FOREIGN KEY (variazioneRIF) REFERENCES VariazioniProdotti(variazioneID) on delete cascade
 );
 
 INSERT INTO Utenti (nome, cognome, email) VALUES
@@ -74,9 +79,13 @@ INSERT INTO Ordini (utenteRIF) VALUES
 (3);
 
 INSERT INTO DettagliOrdini (ordineRIF, variazioneRIF, quantita) VALUES
-(2, 5,7 );
+(2, 2,4 );
+USE NegozioAbbigliamento
 
 SELECT * FROM Ordini
 SELECT * FROM VariazioniProdotti
 SELECT * FROM Prodotti
+SELECT * FROM Categorie
+SELECT * FROM DettagliOrdini
+DELETE FROM Prodotti  WHERE prodottoID=3;
 

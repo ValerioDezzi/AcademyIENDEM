@@ -291,3 +291,5 @@ C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskNegozioAbbig
 C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskNegozioAbbigliamento\GestionaleNegozioAbb\GestionaleNegozioAbb\obj\Debug\net8.0-windows\GestionaleNegozioAbb.pdb
 C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskNegozioAbbigliamento\GestionaleNegozioAbb\GestionaleNegozioAbb\obj\Debug\net8.0-windows\GestionaleNegozioAbb.genruntimeconfig.cache
 C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskNegozioAbbigliamento\GestionaleNegozioAbb\GestionaleNegozioAbb\obj\Debug\net8.0-windows\ref\GestionaleNegozioAbb.dll
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskNegozioAbbigliamento\GestionaleNegozioAbb\GestionaleNegozioAbb\obj\Debug\net8.0-windows\ModaleProdotti.g.cs
+C:\Users\valer\Desktop\AcademyIENDEM MYRepository\AcademyIENDEM\TaskNegozioAbbigliamento\GestionaleNegozioAbb\GestionaleNegozioAbb\obj\Debug\net8.0-windows\ModaleProdotti.baml

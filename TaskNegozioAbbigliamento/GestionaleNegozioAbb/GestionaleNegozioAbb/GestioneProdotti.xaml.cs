@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Button = System.Windows.Controls.Button;
 using MessageBox = System.Windows.MessageBox;
 
 namespace GestionaleNegozioAbb
@@ -26,11 +27,27 @@ namespace GestionaleNegozioAbb
         public GestioneProdotti()
         {
             InitializeComponent();
-            //dgContatti.ItemsSource = PartecipanteDAL.getIstanza().GetAll();
             dgProdotti.ItemsSource = ProdottoDal.getInstance().GetAll();
         }
+        private void CancellaButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            Prodotti? prodotto = (Prodotti)btn.DataContext;
 
-        private void btnAggiungi_Click(object sender, RoutedEventArgs e)
+            if (ProdottoDal.getInstance().Delete(prodotto))
+            {
+                MessageBox.Show("Prodotto Inserito", "Fantastico!", MessageBoxButton.OK, MessageBoxImage.Information);
+                dgProdotti.ItemsSource = ProdottoDal.getInstance().GetAll();
+            }
+            else
+            {
+                MessageBox.Show("Prodotto non inserito", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+    
+    private void btnAggiungi_Click(object sender, RoutedEventArgs e)
         {
             string? nomeInput=this.tbNome.Text;
             string? descrizioneInput=this.tbDescrizione.Text;
@@ -58,20 +75,12 @@ namespace GestionaleNegozioAbb
 
         }
 
-        private void btnElimina_Click(object sender, RoutedEventArgs e)
+     private void ModificaButton_Click(object sender, RoutedEventArgs e)
         {
-            int idInput=Convert.ToInt32(this.tbInputElim.Text);
-            if (ProdottoDal.getInstance().Delete(idInput))
-            {
-                MessageBox.Show("Prodotto Eliminato", "Fantastico!", MessageBoxButton.OK, MessageBoxImage.Information);
-                dgProdotti.ItemsSource = ProdottoDal.getInstance().GetAll();
-            }
-            else
-            {
-                MessageBox.Show("Prodotto non eliminato", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            tbInputElim.Clear();
-            
+            Prodotti prodottoDaModificare = (Prodotti)dgProdotti.SelectedItem;
+            ModaleProdotti modale = new ModaleProdotti(prodottoDaModificare);
+            modale.Show();
+
         }
     }
 }
