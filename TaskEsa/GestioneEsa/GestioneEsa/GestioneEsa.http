@@ -1,0 +1,6 @@
+@GestioneEsa_HostAddress = http://localhost:5133
+
+GET {{GestioneEsa_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
