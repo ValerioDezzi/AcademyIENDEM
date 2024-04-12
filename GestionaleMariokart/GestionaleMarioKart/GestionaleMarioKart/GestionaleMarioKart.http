@@ -1,0 +1,6 @@
+@GestionaleMarioKart_HostAddress = http://localhost:5056
+
+GET {{GestionaleMarioKart_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
