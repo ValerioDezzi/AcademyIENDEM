@@ -6,8 +6,8 @@ namespace GestionaleMarioKart.Services
 {
     public class SquadraService : IService<Squadra>
     {
-        private readonly IRepo<Squadra> _repository;
-        public SquadraService(IRepo<Squadra> repository)
+        private readonly SquadraRepo _repository;
+        public SquadraService(SquadraRepo repository)
         {
             _repository = repository;
         }
@@ -17,9 +17,9 @@ namespace GestionaleMarioKart.Services
             return _repository.Update(entity);
         }
 
-        public bool Elimina(int id)
+        public bool Elimina(SquadraDTO squa)
         {
-            return _repository.Delete(id);
+            return _repository.Delete(_repository.GetByNome(squa.Nome).Id);
         }
 
         public bool Inserisci(SquadraDTO oSqua)
@@ -49,6 +49,20 @@ namespace GestionaleMarioKart.Services
             return this.PrendiliTutti().ToList();
 
         }
-        
+
+        public bool ModificaNome(SquadraDTO squa, string nuovoNome)
+        {
+            if (squa.Nome is not null)
+            {
+                Squadra? temp = _repository.GetByNome(squa.Nome);
+                if (temp is not null)
+                {
+                    temp.Nome = nuovoNome;
+                    return _repository.Update(temp);
+
+                }
+            }
+            return false;
+        }
     }
 }

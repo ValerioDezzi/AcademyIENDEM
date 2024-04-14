@@ -53,6 +53,11 @@ namespace GestionaleMarioKart.Repos
             return _context.Personaggios.Find(id);
         }
 
+        public Personaggio GetByNome(string nome)
+        {
+            return _context.Personaggios.First(p=>p.NomePersonaggio==nome);
+        }
+
         public IEnumerable<Personaggio> GetAll()
         {
             return _context.Personaggios.ToList();

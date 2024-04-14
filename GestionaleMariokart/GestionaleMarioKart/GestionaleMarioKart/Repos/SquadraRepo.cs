@@ -53,6 +53,10 @@ namespace GestionaleMarioKart.Repos
         {
             return _context.Squadras.Find(id);
         }
+        public Squadra GetByNome(string nome)
+        {
+            return _context.Squadras.First(s=>s.Nome==nome);
+        }
 
         public IEnumerable<Squadra> GetAll()
         {

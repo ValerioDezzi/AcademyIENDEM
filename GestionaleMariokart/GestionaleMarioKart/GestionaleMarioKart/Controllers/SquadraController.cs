@@ -50,5 +50,41 @@ namespace GestionaleMarioKart.Controllers
             });
 
         }
+        [HttpDelete("eliminaSquadra/{varNom}")]
+        public ActionResult Delete(string varNom)
+        {
+            if(_service.Elimina(new SquadraDTO()
+                                {
+                                    Nome = varNom
+                                }))
+                return Ok(new Risposta()
+                {
+                    Status = "SUCCESS"
+                });
+            return Ok(new Risposta()
+            {
+                Status = "ERROR",
+                Data = "Eliminazione non effettuata"
+            });
+        }
+
+        [HttpGet("modificaNomeSquadra/{nomeRicerca}/{nuovoNome}")]
+        public ActionResult ModificaNome(string nomeRicerca, string nuovoNome)
+        {
+            if (_service.ModificaNome(new SquadraDTO() { Nome = nomeRicerca, }, nuovoNome))
+                return Ok(new Risposta()
+                {
+                    Status = "SUCCESS"
+                });
+            return Ok(new Risposta()
+            {
+                Status = "ERROR",
+                Data = "Modifica non effettuata"
+            });
+
+
+        }
+
+
     }
 }

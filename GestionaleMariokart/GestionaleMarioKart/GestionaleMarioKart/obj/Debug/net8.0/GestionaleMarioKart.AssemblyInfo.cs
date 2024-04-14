@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionaleMarioKart")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8cbf2fcf2b2d87e8e0a8741e0640259cc19f4557")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd30dba56643ab84d1d3aa2724b7b46653b2361d")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionaleMarioKart")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionaleMarioKart")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

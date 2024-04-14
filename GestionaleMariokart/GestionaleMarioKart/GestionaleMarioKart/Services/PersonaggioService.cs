@@ -1,4 +1,4 @@
-﻿using GestionaleMarioKart.DTO;
+﻿ using GestionaleMarioKart.DTO;
 using GestionaleMarioKart.Models;
 using GestionaleMarioKart.Repos;
 
@@ -6,8 +6,8 @@ namespace GestionaleMarioKart.Services
 {
     public class PersonaggioService : IService<Personaggio>
     {
-        private readonly IRepo<Personaggio> _repository;
-        public PersonaggioService(IRepo<Personaggio> repository)
+        private readonly PersonaggioRepo _repository;
+        public PersonaggioService(PersonaggioRepo repository)
         {
             _repository = repository;
         }
@@ -17,9 +17,9 @@ namespace GestionaleMarioKart.Services
             return _repository.Update(entity);
         }
 
-        public bool Elimina(int id)
+        public bool Elimina(PersonaggioDTO pers)
         {
-            return _repository.Delete(id);
+            return _repository.Delete(_repository.GetByNome(pers.Nom).Id);
         }
 
         public bool Inserisci(PersonaggioDTO oPers)
@@ -46,6 +46,18 @@ namespace GestionaleMarioKart.Services
         {
             return this.PrendiliTutti().ToList();
 
+        }
+        public bool ModificaNome(PersonaggioDTO pers,string nuovoNome)
+        {
+            if (nuovoNome is not null && pers.Nom is not null)
+            {
+                Personaggio? temp = _repository.GetByNome(pers.Nom);
+                if (temp is not null) {
+                temp.NomePersonaggio = nuovoNome;
+                return _repository.Update(temp);
+                }
+            }
+            return false;
         }
     }
 }

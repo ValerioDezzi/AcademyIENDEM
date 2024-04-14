@@ -78,6 +78,23 @@ namespace GestionaleMarioKart.Controllers
             });
         }
 
+        [HttpGet("modifica/{nomeRicerca}/{nuovoNome}")]
+        public ActionResult ModificaNome(string nomeRicerca,string nuovoNome)
+        {
+            if(_service.ModificaNome(new GiocatoreDTO() { Nom=nomeRicerca,},nuovoNome))
+                return Ok(new Risposta()
+                {
+                    Status = "SUCCESS"
+                });
+            return Ok(new Risposta()
+            {
+                Status = "ERROR",
+                Data = "Modifica non effettuata"
+            });
+
+
+        }
+
 
 
     }

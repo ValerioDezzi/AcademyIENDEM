@@ -37,6 +37,10 @@ namespace GestionaleMarioKart.Services
         {
             return _repository.Get(id);
         }
+        public Giocatore PrendiByNome(GiocatoreDTO gioc)
+        {
+            return _repository.GetByNome(gioc.Nom);
+        }
 
         public IEnumerable<Giocatore> PrendiliTutti()
         {
@@ -53,6 +57,20 @@ namespace GestionaleMarioKart.Services
             }).ToList();
 
             return elenco;
+        }
+        public bool ModificaNome(GiocatoreDTO gioc,string nuovoNome)
+        {
+            if(gioc.Nom is not null)
+            {
+                Giocatore? temp = _repository.GetByNome(gioc.Nom);
+                if (temp is not null)
+                {
+                    temp.NomeGiocatore=nuovoNome;
+                    return _repository.Update(temp);
+                    
+                }
+            }
+            return false;
         }
 
         

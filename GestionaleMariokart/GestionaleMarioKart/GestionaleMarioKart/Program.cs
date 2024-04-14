@@ -26,10 +26,10 @@ namespace GestionaleMarioKart
             builder.Services.AddScoped<GiocatoreRepo>();
             builder.Services.AddScoped<GiocatoreService>();
 
-            builder.Services.AddScoped<IRepo<Squadra>, SquadraRepo>();
+            builder.Services.AddScoped<SquadraRepo>();
             builder.Services.AddScoped<SquadraService>();
 
-            builder.Services.AddScoped<IRepo<Personaggio>, PersonaggioRepo>();
+            builder.Services.AddScoped<PersonaggioRepo>();
             builder.Services.AddScoped<PersonaggioService>();
 
             var app = builder.Build();
