@@ -1,0 +1,46 @@
+﻿@model GestioneImpiegati.Models.Impiegati
+@ViewBag.ListaReparti=
+
+<h1>Inserisci Impiegato</h1>
+
+<form method="post" asp-controller="Impiegati" asp-action="Salvataggio">
+    <div class="form-group">
+        <label for="Matricola">Matricola</label>
+        <input type="text" class="form-control" asp-for=Matricola />
+    </div>
+    <div class="form-group">
+        <label for="Nome">Nome</label>
+        <input type="text" class="form-control" asp-for=Nome />
+    </div>
+    <div class="form-group">
+        <label for="Cognome">Cognome</label>
+        <input type="text" class="form-control" asp-for=Cognome />
+    </div>
+    <div class="form-group">
+        <label for="DataNascita">Data di nascita</label>
+        <input type="date" class="form-control" asp-for=DataNascita />
+    </div>
+    <div class="form-group">
+        <label for="Ruolo">Ruolo</label>
+        <input type="text" class="form-control" asp-for=Ruolo />
+    </div>
+    <div class="form-group">
+        <label for="Reparto">Reparto</label>
+        <select name="repartoSelect" asp-for=Reparto>
+
+            <option value="valore1">Opzione 1</option>
+            <option value="valore2">Opzione 2</option>
+            <option value="valore3">Opzione 3</option><!-- Aggiungi più opzioni secondo necessità --></select>
+    </div>
+    <div class="form-group">
+        <label for="Indirizzo">Indirizzo</label>
+        <input type="" class="form-control" asp-for=Indirizzo />
+    </div>
+    <div class="form-group">
+        <label for="Citta">Città</label>
+        <input type="text" class="form-control" asp-for=Citta />
+    </div>
+
+    <button class="btn btn-primary btn-block" type="submit">Salva</button>
+
+</form>

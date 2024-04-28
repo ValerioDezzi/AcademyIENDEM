@@ -1,0 +1,6 @@
+@GestFerrAuth_HostAddress = http://localhost:5198
+
+GET {{GestFerrAuth_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
