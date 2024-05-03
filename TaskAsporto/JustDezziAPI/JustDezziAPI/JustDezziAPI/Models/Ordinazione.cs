@@ -7,6 +7,8 @@ public partial class Ordinazione
 {
     public int Id { get; set; }
 
+    public string Codice { get; set; } = null!;
+
     public DateTime? DataOra { get; set; }
 
     public string? Istruzioni { get; set; }

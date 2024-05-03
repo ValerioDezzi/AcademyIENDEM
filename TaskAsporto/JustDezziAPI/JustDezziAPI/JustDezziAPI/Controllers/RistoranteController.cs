@@ -111,7 +111,7 @@ namespace JustDezziAPI.Controllers
                 Data = "Eliminazione non effettuata"
             });
         }
-        [HttpPut("modificaUtente")]
+        [HttpPut("modificaRistorante")]
         public ActionResult EffettuaModifica(RistoranteDTO nuovo)
         {
             List<string> listaErrori = new List<string>();

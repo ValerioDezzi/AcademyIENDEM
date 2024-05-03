@@ -98,21 +98,35 @@ namespace JustDezziAPI.Controllers
         {
             List<string> listaErrori = new List<string>();
 
+            //if(ModelState.IsValid)
+            //{
+            //    if (_service.Aggiorna(nuovo))
+            //        return Ok(new Risposta()
+            //        {
+            //            Status = "SUCCESS",
+            //        });
+            //    return Ok(new Risposta()
+            //    {
+            //        Status = "ERROR",
+            //        Data = "Utente non modificato"
+            //    });
+            //}
+            //return BadRequest();
             if (string.IsNullOrEmpty(nuovo.Nom))
             {
                 listaErrori.Add("Nome vuoto");
-                
+
             }
 
             if (string.IsNullOrEmpty(nuovo.Ema))
-            { 
+            {
                 listaErrori.Add("email non valida");
             }
 
             if (string.IsNullOrEmpty(nuovo.Ind))
             {
                 listaErrori.Add("indirizzo vuoto");
-                
+
             }
 
             if (listaErrori.Count > 0)
@@ -123,24 +137,18 @@ namespace JustDezziAPI.Controllers
                     Data = listaErrori
                 });
             }
-            
-            Utente esistente = _service.PrendiByNome(nuovo.Nom);
-            if (esistente == null)
-            {
+
+
+            if (_service.Aggiorna(nuovo))
                 return Ok(new Risposta()
                 {
-                    Status = "ERROR",
-                    Data = "Utente non trovato",
+                    Status = "SUCCESS",
                 });
-            }
-            if(_service.Aggiorna(esistente,nuovo))
+            return Ok(new Risposta()
             {
-                return Ok("Utente aggiornato con successo.");
-            }
-            else
-            {
-                return StatusCode(500, "Si è verificato un errore durante l'aggiornamento dell'utente.");
-            }
+                Status = "ERROR",
+                Data = "Utente non modificato"
+            });
 
         }
 

@@ -27,9 +27,9 @@ public partial class JustDezziContext : DbContext
 
     public virtual DbSet<Utente> Utentes { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => \\ optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS01;Database=JustDezzi;User Id=academy;Password=academy!;MultipleActiveResultSets=true;Encrypt=false;TrustServerCertificate=false");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS01;Database=JustDezzi;User Id=academy;Password=academy!;MultipleActiveResultSets=true;Encrypt=false;TrustServerCertificate=false");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -70,12 +70,18 @@ public partial class JustDezziContext : DbContext
 
         modelBuilder.Entity<Ordinazione>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ordinazi__3214EC276FBAC737");
+            entity.HasKey(e => e.Id).HasName("PK__Ordinazi__3214EC27C1111A80");
 
             entity.ToTable("Ordinazione");
 
+            entity.HasIndex(e => e.Codice, "UQ__Ordinazi__40F9C18B3C23D74B").IsUnique();
+
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CarrelloRif).HasColumnName("carrelloRIF");
+            entity.Property(e => e.Codice)
+                .HasMaxLength(150)
+                .IsUnicode(false)
+                .HasColumnName("codice");
             entity.Property(e => e.DataOra)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
@@ -94,17 +100,17 @@ public partial class JustDezziContext : DbContext
             entity.HasOne(d => d.CarrelloRifNavigation).WithMany(p => p.Ordinaziones)
                 .HasForeignKey(d => d.CarrelloRif)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ordinazio__carre__778AC167");
+                .HasConstraintName("FK__Ordinazio__carre__02FC7413");
 
             entity.HasOne(d => d.RistoranteRifNavigation).WithMany(p => p.Ordinaziones)
                 .HasForeignKey(d => d.RistoranteRif)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ordinazio__risto__787EE5A0");
+                .HasConstraintName("FK__Ordinazio__risto__03F0984C");
 
             entity.HasOne(d => d.UtenteRifNavigation).WithMany(p => p.Ordinaziones)
                 .HasForeignKey(d => d.UtenteRif)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ordinazio__utent__76969D2E");
+                .HasConstraintName("FK__Ordinazio__utent__02084FDA");
         });
 
         modelBuilder.Entity<Piatto>(entity =>

@@ -64,17 +64,16 @@ namespace JustDezziAPI.Services
 
             return _repository.Delete(_repository.GetByNome(ute.Nom).Id);
         }
-        public bool Aggiorna( Utente esistente,UtenteDTO nuovo)
+        public bool Aggiorna( UtenteDTO nuovo)
         {
-            if(esistente.Nome is not null|nuovo.Nom is not null)
-            {
-                esistente.Pass = nuovo.Pas;
-                esistente.Email = nuovo.Ema;
-                esistente.Indirizzo= nuovo.Ind;
-                return _repository.Update(esistente);
-            }
-            return false;
-
+           
+                return _repository.Update(new Utente()
+                {
+                    Nome = nuovo.Nom,
+                    Email=nuovo.Ema,
+                    Indirizzo= nuovo.Ind,
+                    Pass=nuovo.Pas
+                });
         }
     }
 }

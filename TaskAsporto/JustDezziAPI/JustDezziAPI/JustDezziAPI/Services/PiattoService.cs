@@ -35,9 +35,6 @@ namespace JustDezziAPI.Services
                 RistoranteRif = piattoDto.RistoranteRif
 
             };
-
-              
-
             return _repository.Create(piatto);
         }
         public Piatto? PrendiByID(int id)

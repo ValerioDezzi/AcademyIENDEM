@@ -56,34 +56,55 @@ namespace JustDezziAPI.Repo
         {
             return _context.Utentes.ToList();
         }
-        public Utente? GetByNome(string nome)
+        public Utente? GetByNome(string? nome)
         {
-            Utente? tmp = null;
             try
             {
-                tmp = _context.Utentes.FirstOrDefault(u => u.Nome == nome);
+                return _context.Utentes.First(u => u.Nome == nome);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return null;
             }
 
-            return tmp;
         }
         public bool Update(Utente entity)
         {
-            try
-            {
-                _context.Utentes.Update(entity);
-                _context.SaveChanges();
+            Utente? temp=GetByNome(entity.Nome);
+            if(temp !=null)
+            {   
+                temp.Indirizzo=entity.Indirizzo;
+                temp.Email=entity.Email;
+                temp.Pass= entity.Pass;
+                try
+                {
+                    _context.Utentes.Update(temp);
+                    _context.SaveChanges();
 
-                return true;
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return false;
-            }
+            return false;
+
+            //try
+            //{
+            //    _context.Utentes.Update(entity);
+            //    _context.SaveChanges();
+
+            //    return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.ToString());
+            //    return false;
+            //}
         }
     }
 }

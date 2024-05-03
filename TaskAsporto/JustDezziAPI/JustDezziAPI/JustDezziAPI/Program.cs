@@ -32,6 +32,12 @@ namespace JustDezziAPI
             builder.Services.AddScoped<PiattoRepo>();
             builder.Services.AddScoped<PiattoService>();
 
+            builder.Services.AddScoped<CarrelloRepo>();
+            builder.Services.AddScoped<CarrelloService>();
+
+            builder.Services.AddScoped<OrdinazioneRepo>();
+            builder.Services.AddScoped<OrdinazioneService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

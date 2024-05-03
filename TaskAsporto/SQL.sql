@@ -44,10 +44,21 @@ CREATE TABLE Carrello_Piatto (
     FOREIGN KEY (piattoRIF) REFERENCES Piatto(ID),
     PRIMARY KEY (carrelloRIF, piattoRIF)
 );
+ALTER TABLE Carrello_Piatto
+ADD CONSTRAINT FK_Carrello_Piatto_Carrello
+FOREIGN KEY (carrelloRIF)
+REFERENCES Carrello(ID)
+ON DELETE CASCADE;
 
+ALTER TABLE Carrello_Piatto
+ADD CONSTRAINT FK_Carrello_Piatto_Piatto
+FOREIGN KEY (piattoRIF)
+REFERENCES Piatto(ID)
+ON DELETE CASCADE;
 DROP TABLE IF EXISTS Ordinazione
 CREATE TABLE Ordinazione(
 	ID INT PRIMARY KEY IDENTITY (1,1),
+	codice VARCHAR (150) UNIQUE NOT NULL,
 	data_ora DATETIME DEFAULT CURRENT_TIMESTAMP,
 	istruzioni TEXT DEFAULT('N.D'),
 	stato VARCHAR (20) NOT NULL CHECK(stato IN('in consegna', 'consegnato', 'annullato')),
@@ -65,6 +76,7 @@ SELECT * FROM Piatto
 SELECT * FROM Carrello
 SELECT * FROM Carrello_Piatto
 SELECT * FROM Ordinazione
+DELETE  FROM Ordinazione
 
 SELECT Ristorante.nome,Piatto.nome
 FROM Ristorante
@@ -106,9 +118,9 @@ VALUES ('P1', 'Pizza Margherita', 'Pizza classica con pomodoro, mozzarella e bas
        ('P5', 'Bistecca alla Fiorentina', 'Bistecca di manzo alla griglia servita con patate arrosto', 20.00, 3),
        ('P6', 'Insalata Caprese', 'Insalata fresca con pomodori, mozzarella di bufala, basilico e olio extra vergine di oliva', 9.00, 1);
 
-INSERT INTO Ordinazione (data_ora, istruzioni, stato, utenteRIF, ristoranteRIF, carrelloRIF)
+INSERT INTO Ordinazione (data_ora,codice, istruzioni, stato, utenteRIF, ristoranteRIF, carrelloRIF)
 VALUES 
-    (DEFAULT, 'N.D', 'in consegna', 3, 1, 1),
-    (DEFAULT, 'N.D', 'consegnato', 4, 2, 2);
+    (DEFAULT,'prova1', 'N.D', 'in consegna', 1, 1, 1),
+    (DEFAULT,'prova2', 'N.D', 'consegnato', 2, 2, 2);
 delete from Ordinazione
    
