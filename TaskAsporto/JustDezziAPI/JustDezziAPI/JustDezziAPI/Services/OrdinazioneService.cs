@@ -10,6 +10,26 @@ namespace JustDezziAPI.Services
         public OrdinazioneService(OrdinazioneRepo repo)
         { _repository = repo; }
 
+        public IEnumerable<Ordinazione> PrendiliTutti()
+        {
+            return _repository.GetAll();
+        }
+
+        public List<OrdinazioneDTO> RestituisciTutti()
+        {
+            List<OrdinazioneDTO> elenco = this.PrendiliTutti().Select(p => new OrdinazioneDTO()
+            {
+                Istruzioni=p.Istruzioni,
+                Codice=p.Codice,
+                CarrelloRif=p.CarrelloRif,
+                RistoranteRif=p.RistoranteRif,
+                UtenteRif=p.UtenteRif,
+                DataOra=p.DataOra,
+                Stato = p.Stato
+            }).ToList();
+            return elenco;
+        }
+
         public bool InserisciOrdinazione(OrdinazioneDTO ordinazioneDto)
         {
 

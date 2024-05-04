@@ -1,4 +1,5 @@
 ﻿using JustDezziAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace JustDezziAPI.Repo
 {
@@ -28,22 +29,50 @@ namespace JustDezziAPI.Repo
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Ordinazione? temp = Get(id);
+                if (temp != null)
+                {
+                    _context.Ordinaziones.Remove(temp);
+                    _context.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
+            return false;
         }
 
         public Ordinazione? Get(int id)
         {
-            throw new NotImplementedException();
+            return _context.Ordinaziones.Find(id);
         }
 
         public IEnumerable<Ordinazione> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Ordinaziones.Include(c=>c.CarrelloRifNavigation).ToList();
         }
 
         public bool Update(Ordinazione entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Ordinaziones.Update(entity);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
     }
 }

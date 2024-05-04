@@ -48,5 +48,15 @@ namespace JustDezziAPI.Controllers
 
 
         }
+
+        [HttpGet("listaOrdinazioni")]
+        public ActionResult<List<OrdinazioneDTO>> ElencoOrdinazioni()
+        {
+            return Ok(new Risposta()
+            {
+                Status = "SUCCESS",
+                Data = _service.RestituisciTutti()
+            });
+        }
     }
 }

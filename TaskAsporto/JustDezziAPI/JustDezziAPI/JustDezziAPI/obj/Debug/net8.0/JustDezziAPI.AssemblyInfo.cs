@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JustDezziAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7c6f10fe37573097b244a58a6516ef21cd55a96")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8546914057882d899d33210bdfa31cbffa85803c")]
 [assembly: System.Reflection.AssemblyProductAttribute("JustDezziAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JustDezziAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
